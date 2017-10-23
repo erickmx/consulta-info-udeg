@@ -21,4 +21,4 @@ def cucba_data(items):
         table['direccion'].append(sub[2].text)
         table['telefono'].append(sub[3].text)
 
-    return table
+    return table, 'cucba'

@@ -1,7 +1,11 @@
 from scrap import make_html
 
 
-@make_html('http://www.cucea.udg.mx/es/acerca-de-cucea/directorio', 'div', 'item-list')
+@make_html(
+    'http://www.cucea.udg.mx/es/acerca-de-cucea/directorio',
+    'div',
+    'item-list'
+)
 def cucea_data(items):
 
     table = {
@@ -29,4 +33,4 @@ def cucea_data(items):
             table['direccion'].append(sub[4].text)
             table['telefono'].append(sub[5].text)
 
-    return table
+    return table, 'cucea'

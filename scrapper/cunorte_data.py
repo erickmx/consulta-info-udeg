@@ -34,4 +34,4 @@ def cunorte_data(items):
             )
             table['telefono'].append(sub[4].text + sub[5].text)
 
-    return table
+    return table, 'cunorte'

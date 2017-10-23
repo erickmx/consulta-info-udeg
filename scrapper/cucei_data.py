@@ -21,4 +21,4 @@ def cucei_data(items):
         table['direccion'].append(sub[2].text)
         table['telefono'].append(sub[4].text)
 
-    return table
+    return table, 'cucei'

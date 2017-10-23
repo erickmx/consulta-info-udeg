@@ -17,9 +17,9 @@ def make_html(page_url, tag_name, tag_class):
             table = {}
 
             # ejecucion de la funcion definida
-            table = func(items)
+            table, html_name = func(items)
 
-            html_file = '{}.html'.format(page_url.split('.')[1])
+            html_file = '{}.html'.format(html_name)
             df = pandas.DataFrame(data=table, columns=table.keys())
 
             salida = open(html_file, 'w')

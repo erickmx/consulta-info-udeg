@@ -28,4 +28,4 @@ def cuvirtual_data(items):
             table['direccion'].append(sub[4].text)
             table['telefono'].append(sub[5].text)
 
-    return table
+    return table, 'cuvirtual'

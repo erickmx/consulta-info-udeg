@@ -62,4 +62,4 @@ def cualtos_data(items):
     table['direccion'].append('Carretera a Yahualica, Km. 7.5 Tepatitlán de Morelos, Jalisco.')
     table['telefono'].append(cad[2][2:])
 
-    return table
+    return table, 'cualtos'
