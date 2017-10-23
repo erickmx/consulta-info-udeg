@@ -1,12 +1,12 @@
 from scrap import make_html
 
 
-# @make_html(
-#     'http://www.udg.mx/directorio/CUAAD:-Centro-Universitario-de-Arte,-Arquitectura-y-Dise%C3%B1o',
-#     'div',
-#     'item-list'
-# )
-@make_html('http://www.cuaad.udg.mx/?q=directorio', 'div', 'dir_contacto')
+# @make_html('http://www.cuaad.udg.mx/?q=directorio', 'div', 'dir_contacto')
+@make_html(
+    'http://www.udg.mx/directorio/CUAAD:-Centro-Universitario-de-Arte,-Arquitectura-y-Dise%C3%B1o',
+    'div',
+    'item-list'
+)
 def cuaad_data(items):
     table = {
         'area': [],
@@ -19,22 +19,34 @@ def cuaad_data(items):
 
     for item in items:
 
-        p = item.find_all('p')
+        li = item.find_all('li', 'views-row')
 
-        for i in p:
-            pass
+        for i in li:
 
-            # sub = i.find_all(class_='field-content')
-            # print('--' * 20)
-            # print(sub)
+            if item.h3 is not None:
+                table['area'].append(item.h3.text)
 
-            # table['area'].append(item.h3.text)
-            # table['puesto'].append(sub[1].h2.text)
-            # table['imagen'].append(
-            #     sub[2].img['src'] if sub[2].img is not None else ''
-            # )
-            # table['nombre'].append(sub[3].a.text)
-            # table['direccion'].append(sub[4].text)
-            # table['telefono'].append(sub[5].text)
+            if i is not None:
 
-    return table
+                puesto = i.find(class_='puesto-directorio')
+                nombre = i.find(class_='views-field-title')
+                img = i.find(class_='foto-directorio')
+                direccion = i.find(class_='direccion-directorio')
+                telefono = i.find(class_='telefono-directorio')
+
+                if puesto is not None:
+                    table['puesto'].append(puesto.text)
+
+                if nombre is not None:
+                    table['nombre'].append(nombre.text)
+
+                if img is not None:
+                    table['imagen'].append(img.img['src'])
+
+                if direccion is not None:
+                    table['direccion'].append(direccion.text)
+
+                if telefono is not None:
+                    table['telefono'].append(telefono.text)
+
+    return table, 'cuaad'

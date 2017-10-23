@@ -4,7 +4,7 @@
 # import pandas
 
 # Tematic centers:
-# from cuaad_data import cuaad_data **************
+# from cuaad_data import cuaad_data
 # from cucba_data import cucba_data
 # from cucea_data import cucea_data
 # from cucei_data import cucei_data
@@ -34,13 +34,13 @@
 # cucsh_data()
 
 # cualtos_data()
-# cucienega_data() # renombrar el archivo que generara udg.html
+# cucienega_data()
 # cucosta_data()
 # cucsur_data()
 # culagos_data()
 # cunorte_data()
 # cusur_data()
-# cutonala_data() # tambien genera archivo udg.html
+# cutonala_data()
 # cuvalles_data()
 
 # cuvirtual_data()
