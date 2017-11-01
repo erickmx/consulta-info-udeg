@@ -12,14 +12,76 @@ def normalize_text(s):
 
 
 def split_name(name):
+    # apellidos de+la+cruz
     aux = name.split(' ')
+
     first_name = aux[0]
-    if aux[-1] is not '':
-        last_name1 = aux[-2]
-        last_name2 = aux[-1]
+
+    if 'De' not in aux or 'Del' not in aux:
+        # and len(aux) < 4
+        if aux[-1] is not '':
+            last_name1 = aux[-2]
+            last_name2 = aux[-1]
+        else:
+            last_name1 = aux[-3]
+            last_name2 = aux[-2]
+
     else:
-        last_name1 = aux[-3]
-        last_name2 = aux[-2]
+        if aux[3].lower() == 'de':
+            if aux[4].lower() == 'la':
+                last_name1 = f'{aux[3]}+{aux[4]}+{aux[5]}'
+            else:
+                last_name1 = f'{aux[3]}+{aux[4]}'
+        elif aux[2].lower() == 'de':
+            if aux[3].lower() == 'la':
+                last_name1 = f'{aux[2]}+{aux[3]}+{aux[4]}'
+            else:
+                last_name1 = f'{aux[2]}+{aux[3]}'
+        elif aux[1].lower() == 'de':
+            if aux[2].lower() == 'la':
+                last_name1 = f'{aux[1]}+{aux[2]}+{aux[3]}'
+            else:
+                last_name1 = f'{aux[1]}+{aux[2]}'
+        else:
+            if aux[-1] is not '':
+                last_name1 = aux[-2]
+            else:
+                last_name1 = aux[-3]
+
+        if aux[4].lower() == 'de':
+            if aux[5].lower() == 'la':
+                last_name2 = f'{aux[4]}+{aux[5]}+{aux[6]}'
+            else:
+                last_name2 = f'{aux[4]}+{aux[5]}'
+        elif aux[3].lower() == 'de':
+            if aux[4].lower() == 'la':
+                last_name2 = f'{aux[3]}+{aux[4]}+{aux[5]}'
+            else:
+                last_name2 = f'{aux[3]}+{aux[4]}'
+        elif aux[2].lower() == 'de':
+            if aux[3].lower() == 'la':
+                last_name2 = f'{aux[2]}+{aux[3]}+{aux[4]}'
+            else:
+                last_name2 = f'{aux[2]}+{aux[3]}'
+        else:
+            if aux[-1] is not '':
+                last_name2 = aux[-1]
+            else:
+                last_name2 = aux[-2]
+
+        if aux[3].lower() == 'del':
+            last_name1 = f'{aux[3]}+{aux[4]}'
+        elif aux[2].lower() == 'del':
+            last_name1 = f'{aux[2]}+{aux[3]}'
+        elif aux[1].lower() == 'del':
+            last_name1 = f'{aux[1]}+{aux[2]}'
+
+        if aux[4].lower() == 'del':
+            last_name2 = f'{aux[4]}+{aux[5]}'
+        elif aux[3].lower() == 'del':
+            last_name2 = f'{aux[3]}+{aux[4]}'
+        elif aux[2].lower() == 'del':
+            last_name1 = f'{aux[2]}+{aux[3]}'
 
     if 'ñ' not in first_name:
         first_name = normalize_text(first_name)
@@ -51,7 +113,6 @@ def nomina_udg(nombre, ap1, ap2):
         # class_='td_beige',
         attrs={'data-title': 'SUELDO NETO'}
     )
-    print('----' * 20)
     total = []
     for t in td:
         if t is not None:
@@ -59,7 +120,6 @@ def nomina_udg(nombre, ap1, ap2):
         else:
             total.append('0.00')
     return total
-    print(pagina.url)
 
 
 def check_nomina(name_list=[]):
@@ -77,9 +137,6 @@ def check_nomina(name_list=[]):
 
         salario = nomina_udg(first_name, last_name1, last_name2)
 
-        print(complete_name)
-        print(salario)
-        print('----' * 20)
         list_salarios.append(salario)
 
     return list_salarios
@@ -112,5 +169,3 @@ def cucei_data(items):
 
 
 cucei_data()
-
-# print(normalize_text('córcholisñÑ'))
